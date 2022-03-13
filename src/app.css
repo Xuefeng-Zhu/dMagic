@@ -1,0 +1,16 @@
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  background: rgb(245, 247, 250);
+  padding: 20px;
+}

@@ -1,0 +1,84 @@
+{
+  "name": "project_youtube_video_player",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@0xsequence/web3modal": "^2.0.0",
+    "@apollo/client": "^3.4.16",
+    "@chainlink/contracts": "^0.4.0",
+    "@openzeppelin/contracts": "^4.4.1",
+    "@superfluid-finance/sdk-core": "^0.3.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@zoralabs/nft-components": "^0.3.2",
+    "0xsequence": "^0.36.1",
+    "antd": "^4.18.5",
+    "antd-mobile": "^5.0.0-rc.18",
+    "antd-mobile-icons": "^0.2.2",
+    "axios": "^0.24.0",
+    "eth-hooks": "^4.0.44",
+    "graphql": "^15.6.1",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-dom": "^17.0.2",
+    "react-jss": "^10.9.0",
+    "react-number-format": "^4.9.1",
+    "react-query": "^3.33.2",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "react-scroll-horizontal": "^1.6.6",
+    "react-use": "^17.3.1",
+    "web-vitals": "^1.1.2",
+    "web3modal": "^1.9.4"
+  },
+  "scripts": {
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
+    "eject": "DISABLE_ESLINT_PLUGIN=true react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.3",
+    "@nomiclabs/hardhat-etherscan": "^2.1.8",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.27.1",
+    "ethers": "^5.5.2",
+    "hardhat": "^2.8.0",
+    "hardhat-deploy": "^0.9.14",
+    "hardhat-gas-reporter": "^1.0.6",
+    "prettier": "^2.5.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "solhint": "^3.3.6",
+    "solidity-coverage": "^0.7.17"
+  }
+}
