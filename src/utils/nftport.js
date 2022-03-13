@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const NFT_PORT_API = 'https://api.nftport.xyz/v0';
-const NFT_CONTRACT = '0x38776a041ab363ddb58a1ad1e434a29572943b30';
+const NFT_CONTRACT = '0xFA9C02e56a18E62099bfEa96e3A2060aA7072E68';
 
 export const uploadFile = async (file) => {
   const data = new FormData();
@@ -47,7 +47,7 @@ export const mintNFT = async (data, address) => {
       Authorization: process.env.REACT_APP_NFT_PORT_API_KEY,
     },
     data: {
-      chain: 'polygon',
+      chain: 'rinkeby',
       contract_address: NFT_CONTRACT,
       metadata_uri: metadata.metadata_uri,
       mint_to_address: address,
@@ -66,7 +66,7 @@ export const getContractNFTs = async () => {
       Authorization: process.env.REACT_APP_NFT_PORT_API_KEY,
     },
     params: {
-      chain: 'polygon',
+      chain: 'rinkeby',
       include: 'all',
     },
   };
@@ -82,7 +82,7 @@ export const getNFTDetails = async (tokenId) => {
       'Content-Type': 'application/json',
       Authorization: process.env.REACT_APP_NFT_PORT_API_KEY,
     },
-    params: { chain: 'polygon' },
+    params: { chain: 'rinkeby' },
   };
 
   return axios.request(options).then((res) => res.data);

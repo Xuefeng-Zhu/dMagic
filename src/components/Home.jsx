@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
 import { Skeleton, Card, List } from 'antd';
 
-import { getContractNFTs } from '../utils/nftport';
+import { useWeb3Context } from '../contexts/Web3ContextProvider';
+import { useStateContext } from '../contexts/StateContextProvider';
 
 const Home = () => {
-  const { isLoading, data } = useQuery(['HomeFeeds'], () => getContractNFTs());
-  const history = useHistory();
+  const { address } = useWeb3Context();
+  const { getOwnedCards } = useStateContext();
+  const { isLoading, data } = useQuery(['HomeFeeds', address], () =>
+    getOwnedCards()
+  );
 
   if (isLoading) {
     return <Skeleton />;
@@ -15,16 +18,12 @@ const Home = () => {
 
   return (
     <List
+      style={{ width: '100%' }}
       grid={{ gutter: 16, column: 4 }}
-      dataSource={data.nfts}
+      dataSource={data}
       renderItem={(nft) => (
         <List.Item>
-          <Card
-            hoverable
-            style={{ marginTop: 16 }}
-            cover={<img src={nft.file_url} height="200px" />}
-            onClick={() => history.push(`/project/${nft.token_id}`)}
-          >
+          <Card style={{ width: '100%' }} cover={<img src={nft.file_url} />}>
             <Card.Meta title={nft.metadata.name} />
           </Card>
         </List.Item>

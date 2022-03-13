@@ -1,66 +1,79 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { useEthersContext } from 'eth-hooks/context';
 import { Card, Button, Result, notification } from 'antd';
 import {
   LogoutOutlined,
   FileAddOutlined,
   SmileOutlined,
+  LoadingOutlined,
 } from '@ant-design/icons';
 
-import { uploadFile, mintNFT } from '../utils/nftport';
+import { uploadMetadata } from '../utils/nftport';
 import { useStateContext } from '../contexts/StateContextProvider';
+import { useWeb3Context } from '../contexts/Web3ContextProvider';
 
 const DrawCard = () => {
-  const ethersContext = useEthersContext();
-  console.log(ethersContext);
+  const { address } = useWeb3Context();
   const { dMagic } = useStateContext();
-  const { isLoading, data = {} } = useQuery(['DrawCard'], () =>
+  const { data: cardId } = useQuery(['CardId', address], async () => {
+    if (!dMagic) {
+      return;
+    }
+    const randomWord = await dMagic.userRandomWords(address);
+    return randomWord.toNumber();
+  });
+  const { data = {} } = useQuery(['CardInfo', cardId], () =>
     axios
-      .get(`https://api.magicthegathering.io/v1/cards/4980`)
+      .get(`https://api.magicthegathering.io/v1/cards/${cardId}`)
       .then((res) => res.data)
   );
   const [loading, setLoading] = useState(false);
   const { card = {} } = data;
 
-  const createProject = async (values) => {
-    const { name, owner, description, logo, website, github } = values;
-    setLoading(true);
-    await mintNFT(
-      {
-        name,
-        description,
-        file_url: logo?.file?.response?.ipfs_url,
-        custom_fields: {
-          website,
-          github,
-          owner,
-        },
-      },
-      owner
-    );
-    setLoading(false);
-    notification.open({
-      message: `Project ${name} created`,
+  const drawCard = async () => {
+    if (!dMagic) {
+      return;
+    }
+    await dMagic.drawCard({
+      value: 1000000000,
     });
   };
 
-  return (
-    <Result
-      icon={<SmileOutlined />}
-      title="Let's draw a magic card!"
-      extra={
-        <Button
-          type="primary"
-          icon={<LogoutOutlined />}
-          onClick={() => this.enterLoading(2)}
-        >
-          Draw Card
-        </Button>
-      }
-    />
-  );
+  const mintCard = async () => {
+    if (!dMagic) {
+      return;
+    }
+    const res = await uploadMetadata({
+      name: card.name,
+      custom_fields: {
+        owner: address,
+      },
+      description: card.text,
+      file_url: card.imageUrl,
+    });
+    await dMagic.mintCard(address, res.metadata_uri);
+  };
+
+  if (!cardId) {
+    return (
+      <Result
+        icon={<SmileOutlined />}
+        title="Let's draw a magic card!"
+        extra={
+          <Button type="primary" icon={<LogoutOutlined />} onClick={drawCard}>
+            Draw Card
+          </Button>
+        }
+      />
+    );
+  }
+
+  if (cardId === 5001) {
+    return (
+      <Result icon={<LoadingOutlined />} title="Waiting the draw card result" />
+    );
+  }
 
   return (
     <Card
@@ -71,18 +84,10 @@ const DrawCard = () => {
         </div>
       }
       actions={[
-        <Button
-          type="text"
-          icon={<LogoutOutlined />}
-          onClick={() => this.enterLoading(2)}
-        >
+        <Button type="text" icon={<LogoutOutlined />} onClick={drawCard}>
           Draw Card
         </Button>,
-        <Button
-          type="text"
-          icon={<FileAddOutlined />}
-          onClick={() => this.enterLoading(2)}
-        >
+        <Button type="text" icon={<FileAddOutlined />} onClick={mintCard}>
           Mint NFT
         </Button>,
       ]}

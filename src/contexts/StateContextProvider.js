@@ -10,23 +10,29 @@ import * as nftport from '../utils/nftport';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { provider, signer } = useWeb3Context();
-  const [dMagic, setDMagic] = useState();
+  const { address, signer } = useWeb3Context();
+  const [dMagic, setDMagic] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(async () => {
-    if (!provider) {
+    if (!signer) {
       return;
     }
 
-    setDMagic(DMagic(signer || provider));
-  }, [provider, signer]);
+    setDMagic(DMagic(signer));
+  }, [signer]);
+
+  const getOwnedCards = async () => {
+    const data = await nftport.getContractNFTs();
+    return data.nfts.filter((nft) => nft.metadata.owner === address);
+  };
 
   return (
     <StateContext.Provider
       value={{
         loading,
         dMagic,
+        getOwnedCards,
       }}
     >
       {children}
