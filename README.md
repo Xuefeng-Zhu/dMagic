@@ -2,8 +2,8 @@ dMagic
 
 ### Overview
 
-dMagic is decentralized platform allowing developers or creators raise fund for their projects without middleman and censorship. Users are able to create projects freely and accountless on dMagic. Donors can make one-time or monthly contributions easily with any ERC20 token or SuperToken.
+Magic was the first collectible card game with millions of players. There is an active secondary market for Magic cards. However, physical cards are hard to store and verify authenticity. Magic cards can also be collected digitally, but these cards are stored on a centralized server. dMagic is a decentralized Magic card collection powered by NFT. Users can pay a small amount fee to draw a card and mint it as an NFT, which can be easily traded on a public marketplace
 
 ### How it is made
 
-dMagic is built with React and Ant design UI components. Users are able to connect to Metamask or Sequence wallet on dMagic. dMagic enables users to create a project by minting free NFT on Polygon through NFTPort API. dMagic also loads NFTs within a contract with NFTPort API. dMagic gets tokens and transactions accociated with an account using Colavent API. dMagic allows donors to send monthly payment by Superfuild Supertoken. dMagic uses Superfuild Subgraph to load active streams data for a user. Finally, the application is deployed to IPFS through Fleek
+dMagic is built with React and Ant design UI components. Users can connect to Metamask or Sequence wallet on dMagic. dMagic uses Chainlink VRF to generate a random number to choose a card when a user draws a card. dMagic uploads NFT metadata through NFTPort API. dMagic also loads NFTs within a contract with NFTPort API. Finally, the application is deployed to IPFS through Fleek

@@ -18,7 +18,7 @@ const web3Modal = new Web3Modal({
       package: sequence,
       options: {
         appName: 'dMagic',
-        defaultNetwork: 'mumbai',
+        defaultNetwork: 'rinkeby',
       },
     },
   },
